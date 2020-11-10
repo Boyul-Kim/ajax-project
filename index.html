@@ -3,15 +3,92 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script type="text/javascript" src="xmlToJson.js"></script>
   <title>AJAX Project</title>
+    <link rel="stylesheet" crossorigin="anonymous"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
+      integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==">
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
   <header>
+    <div class="header-profile-list hidden">
+      <div class="row align-items-center">
+        <div class="width-20 text-align">Home</div>
+        <div class="width-20 text-align">Stats</div>
+        <div class="width-20 text-align">Draft List</div>
+      </div>
+    </div>
   </header>
   <main>
+    <div class="container">
+
+      <div data-view="homepage">
+
+        <div class="row">
+          <h1 class="homepage-title">Fantasy Basketball Draft App</h1>
+        </div>
+
+        <div class="row homepage-image margin-bottom">
+          <img src="nba.png" alt="">
+        </div>
+
+        <div class="row">
+          <div class="block">
+              <form action="">
+                <input type="search" name="search-player" id="search-player" class="homepage-form-search homepage-form-input margin-bottom" placeholder="Search Player Name">
+              </form>
+              <button class="homepage-form-search-button homepage-form-input margin-bottom">Search by Stats</button>
+              <button class="homepage-form-search-list homepage-form-input">Draft List</button>
+          </div>
+
+        </div>
+
+      </div>
+
+      <div data-view="profile" class="margin-top hidden">
+        <div class="row justify-content-end">
+          <i class="fas fa-plus fa-2x"></i>
+        </div>
+
+        <div class="row">
+          <h1 class="playerName">Player Name</h1>
+        </div>
+
+
+        <div class="block player-info">
+          <h3>Draft Rank: </h3>
+          <h3>Position: </h3>
+        </div>
+
+
+        <div class="row background-color profile-projection-header align-items-center margin-top">
+          Stat Projections:
+        </div>
+
+        <table class="margin-top">
+          <thead>
+            <tr>
+              <th>PPG</th>
+              <th>APG</th>
+              <th>RPG</th>
+              <th>SPG</th>
+              <th>BPG</th>
+              <th>FT%</th>
+              <th>3PT%</th>
+              <th>TO</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr></tr>
+          </tbody>
+        </table>
+
+      </div>
+
+    </div>
   </main>
   <script src="js/data.js"></script>
   <script src="js/main.js"></script>
