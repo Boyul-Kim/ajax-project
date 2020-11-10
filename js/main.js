@@ -1,16 +1,17 @@
-// var xml = null;
-// function ballProjections() {
-//   var xhr = new XMLHttpRequest();
-//   xhr.open('GET', 'https://cors-anywhere.herokuapp.com/https://www.fantasybasketballnerd.com/service/draft-projections');
-//   xhr.responseType = 'document';
-//   xhr.addEventListener('load', function () {
-//     console.log(xhr.status);
-//     console.log(xhr.response);
-//     xml = xhr.response;
-//     console.log('xml', xml);
-//     var jsonString = JSON.stringify(xmlToJson(xml));
-//     console.log('to JSON', JSON.parse(jsonString));
-//   });
-//   xhr.send();
-// }
-// ballProjections();
+var addButton = document.querySelector('.fas');
+function addPlayer() {
+  //add code here to add player when plus button is pressed
+}
+
+var dataView = document.querySelectorAll('[data-view]');
+var $form = document.querySelector('form');
+var $homepageSearch = document.querySelector('.homepage-form-search');
+var $header = document.querySelector('.header-profile-list');
+$form.addEventListener('submit', function(e) {
+  e.preventDefault();
+  ballDontLie($homepageSearch.value);
+  dataView[0].classList.add('hidden');
+  dataView[1].classList.remove('hidden');
+  $header.classList.remove('hidden');
+});
+//ballDontLie('kevin durant');

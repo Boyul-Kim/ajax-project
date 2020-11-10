@@ -33,6 +33,10 @@
   height: 3rem;
 }
 
+.player-info {
+  width: 80%;
+}
+
 table {
   width: 90%;
   margin: auto;
