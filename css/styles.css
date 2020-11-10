@@ -1,0 +1,29 @@
+.homepage {
+  width: 100%;
+}
+
+.homepage-title {
+  text-align: center;
+}
+
+.homepage-image {
+  height: 200px;
+}
+
+.homepage-image img{
+  width: 80%;
+}
+
+.homepage-form-input {
+  width: 100%;
+  height: 3rem;
+  background-color: rgb(198, 56, 56);
+  color: white;
+  border: none;
+  border-radius: 1.5rem;
+}
+
+.homepage-form-search::placeholder {
+  color: white;
+  text-align: center;
+}
