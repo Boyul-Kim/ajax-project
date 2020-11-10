@@ -27,3 +27,13 @@
   color: white;
   text-align: center;
 }
+
+.profile-projection-header {
+  width: 70%;
+  height: 3rem;
+}
+
+table {
+  width: 90%;
+  margin: auto;
+}
