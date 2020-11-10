@@ -22,8 +22,14 @@ function ballDontLie(player) {
   xhr.responseType = 'json';
   xhr.addEventListener('load', function () {
     if(xhr.status === 200) {
-      console.log(xhr.response.data[0].first_name);
-      $playerName.textContent = xhr.response.data[0].first_name + ' ' + xhr.response.data[0].last_name
+      var firstLast = player.split(' ');
+      if ((firstLast[0].toLowerCase() === xhr.response.data[0].first_name.toLowerCase()) && (firstLast[1].toLowerCase() === xhr.response.data[0].last_name.toLowerCase())) {
+        console.log('match');
+        $playerName.textContent = xhr.response.data[0].first_name + ' ' + xhr.response.data[0].last_name
+      }else {
+        $playerName.textContent = 'Player Name';
+      }
+
     }
 
   });
