@@ -23,6 +23,12 @@
   border-radius: 1.5rem;
 }
 
+.homepage-form-search {
+  background-color: rgb(158, 158, 158);
+  text-align: center;
+
+}
+
 .homepage-form-search::placeholder {
   color: white;
   text-align: center;
