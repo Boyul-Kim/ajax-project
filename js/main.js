@@ -4,11 +4,11 @@ function addPlayer() {
 }
 
 var dataView = document.querySelectorAll('[data-view]');
-var $form = document.querySelector('form');
+var $homepageForm = document.querySelector('.homepageForm');
 var $homepageSearch = document.querySelector('.homepage-form-search');
 var $header = document.querySelector('.header-profile-list');
 var $playerName = document.querySelector('.playerName');
-$form.addEventListener('submit', function(e) {
+$homepageForm.addEventListener('submit', function(e) {
   e.preventDefault();
   ballDontLie($homepageSearch.value);
   dataView[0].classList.add('hidden');
@@ -17,4 +17,9 @@ $form.addEventListener('submit', function(e) {
   if($playerName.textContent === 'Player Name') {
     $playerName.textContent = 'Player not found. Please try again.'
   }
+});
+
+var $option = document.querySelector('.topPlayerForm');
+$option.addEventListener('click', function(e) {
+  console.log(e.target.value);
 });

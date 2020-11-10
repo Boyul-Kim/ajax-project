@@ -14,7 +14,7 @@
 </head>
 <body>
   <header>
-    <div class="header-profile-list hidden">
+    <div class="header-profile-list">
       <div class="row align-items-center">
         <div class="width-20 text-align">Home</div>
         <div class="width-20 text-align">Stats</div>
@@ -25,7 +25,7 @@
   <main>
     <div class="container">
 
-      <div data-view="homepage">
+      <div data-view="homepage" class="hidden">
 
         <div class="row">
           <h1 class="homepage-title">Fantasy Basketball Draft App</h1>
@@ -37,7 +37,7 @@
 
         <div class="row">
           <div class="block">
-              <form action="">
+              <form class="homepageForm" action="">
                 <input type="search" name="search-player" id="search-player" class="homepage-form-search homepage-form-input margin-bottom" placeholder="Search Player Name">
               </form>
               <button class="homepage-form-search-button homepage-form-input margin-bottom">Search by Stats</button>
@@ -85,6 +85,31 @@
             <tr></tr>
           </tbody>
         </table>
+
+      </div>
+
+      <div data-view="top-players">
+
+        <div class="row">
+          <h1>Top 25 by Stats</h1>
+        </div>
+
+        <div class="row">
+          <form action="" class="topPlayerForm">
+            <label class="margin-right" for="stats">Select a Stat</label>
+            <select name="stats" id="stats">
+              <option value="stat">Stat</option>
+              <option value="PPG">PPG</option>
+              <option value="APG">APG</option>
+              <option value="RPG">RPG</option>
+              <option value="SPG">SPG</option>
+              <option value="BPG">BPG</option>
+              <option value="FT%">FT%</option>
+              <option value="3PT%">3PT%</option>
+              <option value="TO">TO</option>
+            </select>
+          </form>
+        </div>
 
       </div>
 
