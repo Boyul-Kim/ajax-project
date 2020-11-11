@@ -8,6 +8,27 @@ var $tableProjectionBody = document.querySelector('.table-projections-body');
 var $tableProjectionBodyRow = document.querySelector('.table-projections-body-row');
 var storage = []
 
+var data = {
+  profile: {
+    name: '',
+    position: '',
+    depth: '',
+  },
+  entries: []
+}
+
+var previousDataJson = localStorage.getItem('playerData');
+if(previousDataJson !== null) {
+  data = JSON.parse(previousDataJson);
+}
+
+function profileStorage(event) {
+  var dataJson =  JSON.stringify(data);
+  localStorage.setItem('playerData', dataJson);
+}
+window.addEventListener('beforeunload', profileStorage);
+
+//used for fantasybasektballnerd api
 var xml = null;
 function ballProjections() {
   var xhr = new XMLHttpRequest();
@@ -23,7 +44,7 @@ function ballProjections() {
   });
   xhr.send();
 }
-//ballProjections();
+
 
 function ballDontLie(player) {
   var xhr = new XMLHttpRequest();

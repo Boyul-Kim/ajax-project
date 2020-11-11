@@ -8,6 +8,7 @@ var $position = document.querySelector('.position');
 var $tableDraftListBody = document.querySelector('.table-draft-list-body');
 
 console.log(dataView);
+//when user enters player name in search bar, then page will change to profile view
 $homepageForm.addEventListener('submit', function(e) {
   e.preventDefault();
   ballDontLie($homepageSearch.value);
@@ -19,31 +20,39 @@ $homepageForm.addEventListener('submit', function(e) {
   }
 });
 
+
+
+
+//for dropdown menu
 var $option = document.querySelector('.topPlayerForm');
 $option.addEventListener('click', function(e) {
   console.log(e.target.value);
 });
 
+//add player to local storage
 function addPlayer() {
-  //console.log($playerName.textContent);
-  // console.log($position.textContent);
+
+  addButton.classList.add('red-color');
   var positionCut = $position.textContent.split(' ');
   //console.log(positionCut[1]);
+  data.profile.name = $playerName.textContent;
+  data.profile.position = positionCut[1];
+  data.entries.push(data.profile);
 
-  var $trAdd = document.createElement('tr');
+  // var $trAdd = document.createElement('tr');
 
-  var $tdAddName = document.createElement('td');
-  $tdAddName.textContent = $playerName.textContent;
-  $trAdd.appendChild($tdAddName);
+  // var $tdAddName = document.createElement('td');
+  // $tdAddName.textContent = $playerName.textContent;
+  // $trAdd.appendChild($tdAddName);
 
-  var $tdAddPosition = document.createElement('td');
-  $tdAddPosition.textContent = positionCut[1];
-  $trAdd.appendChild($tdAddPosition);
+  // var $tdAddPosition = document.createElement('td');
+  // $tdAddPosition.textContent = positionCut[1];
+  // $trAdd.appendChild($tdAddPosition);
 
-  var removeButton = document.createElement('button')
-  removeButton.textContent = 'Remove';
-  $trAdd.appendChild(removeButton);
+  // var removeButton = document.createElement('button')
+  // removeButton.textContent = 'Remove';
+  // $trAdd.appendChild(removeButton);
 
-  $tableDraftListBody.appendChild($trAdd);
+  // $tableDraftListBody.appendChild($trAdd);
 }
 addButton.addEventListener('click', addPlayer);
