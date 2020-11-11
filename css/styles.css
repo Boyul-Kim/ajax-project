@@ -43,7 +43,15 @@
   width: 80%;
 }
 
-table {
-  width: 90%;
-  margin: auto;
+.topPlayerForm {
+  font-size: 20px;
+}
+
+.topPlayerForm select {
+  width: 5rem;
+}
+
+.topPlayerForm option {
+  background-color: rgb(198, 56, 56);
+  color:white;
 }

@@ -63,7 +63,15 @@ header {
 }
 
 .header-profile-list {
-  font-size: 1.4rem;
   height: 5rem;
   color: white;
+}
+
+table {
+  width: 90%;
+  margin: auto;
+}
+
+tr {
+  text-align: center;
 }
