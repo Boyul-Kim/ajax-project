@@ -1,13 +1,13 @@
-var addButton = document.querySelector('.fas');
-function addPlayer() {
-  //add code here to add player when plus button is pressed
-}
-
+var addButton = document.querySelector('.fa-plus');
 var dataView = document.querySelectorAll('[data-view]');
 var $homepageForm = document.querySelector('.homepageForm');
 var $homepageSearch = document.querySelector('.homepage-form-search');
 var $header = document.querySelector('.header-profile-list');
 var $playerName = document.querySelector('.playerName');
+var $position = document.querySelector('.position');
+var $tableDraftListBody = document.querySelector('.table-draft-list-body');
+
+console.log(dataView);
 $homepageForm.addEventListener('submit', function(e) {
   e.preventDefault();
   ballDontLie($homepageSearch.value);
@@ -23,3 +23,27 @@ var $option = document.querySelector('.topPlayerForm');
 $option.addEventListener('click', function(e) {
   console.log(e.target.value);
 });
+
+function addPlayer() {
+  //console.log($playerName.textContent);
+  // console.log($position.textContent);
+  var positionCut = $position.textContent.split(' ');
+  //console.log(positionCut[1]);
+
+  var $trAdd = document.createElement('tr');
+
+  var $tdAddName = document.createElement('td');
+  $tdAddName.textContent = $playerName.textContent;
+  $trAdd.appendChild($tdAddName);
+
+  var $tdAddPosition = document.createElement('td');
+  $tdAddPosition.textContent = positionCut[1];
+  $trAdd.appendChild($tdAddPosition);
+
+  var removeButton = document.createElement('button')
+  removeButton.textContent = 'Remove';
+  $trAdd.appendChild(removeButton);
+
+  $tableDraftListBody.appendChild($trAdd);
+}
+addButton.addEventListener('click', addPlayer);

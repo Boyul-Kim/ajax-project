@@ -77,7 +77,7 @@ function ballDontLieSeasonAvg(season, id) {
       // dataPoint.textContent = projectionStat;
       // $tableProjectionBodyRow.appendChild(dataPoint);
     }
-    console.log(storage);
+    //console.log(storage);
     ballDontLieSeasonProjection(storage);
   });
   xhr.send();
