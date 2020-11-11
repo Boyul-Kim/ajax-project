@@ -75,3 +75,7 @@ table {
 tr {
   text-align: center;
 }
+
+.padding-1 {
+  padding: 1rem;
+}
