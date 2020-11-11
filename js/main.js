@@ -6,8 +6,47 @@ var $header = document.querySelector('.header-profile-list');
 var $playerName = document.querySelector('.playerName');
 var $position = document.querySelector('.position');
 var $tableDraftListBody = document.querySelector('.table-draft-list-body');
+var $homeIcon = document.querySelector('.fa-home');
+var $chartIcon = document.querySelector('.fa-chart-line');
+var $listIcon = document.querySelector('.fa-list');
+var $depthButton = document.querySelector('.homepage-form-search-button');
+var $draftButton = document.querySelector('.homepage-form-search-list');
 
-console.log(dataView);
+function viewSwap(index) {
+  for(var i = 0; i<=dataView.length-1; i++) {
+    if(i === index) {
+      dataView[i].classList.remove('hidden');
+    }else {
+      dataView[i].classList.add('hidden');
+    }
+  }
+}
+
+$homeIcon.addEventListener('click', function()  {
+  viewSwap(0);
+  $header.classList.add('hidden');
+});
+
+$chartIcon.addEventListener('click', function() {
+  viewSwap(2);
+  $header.classList.remove('hidden');
+})
+
+$depthButton.addEventListener('click', function () {
+  viewSwap(2);
+  $header.classList.remove('hidden');
+})
+
+$draftButton.addEventListener('click', function () {
+  viewSwap(3);
+  $header.classList.remove('hidden');
+});
+
+$listIcon.addEventListener('click', function ()  {
+  viewSwap(3);
+  $header.classList.remove('hidden');
+});
+
 //when user enters player name in search bar, then page will change to profile view
 $homepageForm.addEventListener('submit', function(e) {
   e.preventDefault();
@@ -18,10 +57,8 @@ $homepageForm.addEventListener('submit', function(e) {
   if($playerName.textContent === 'Player Name') {
     $playerName.textContent = 'Player not found. Please try again.'
   }
+  $homepageSearch.value = '';
 });
-
-
-
 
 //for dropdown menu
 var $option = document.querySelector('.topPlayerForm');
