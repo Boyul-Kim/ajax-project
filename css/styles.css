@@ -36,14 +36,32 @@
 
 .profile-projection-header {
   width: 70%;
-  height: 3rem;
+  height: 2rem;
 }
 
 .player-info {
   width: 80%;
 }
 
-table {
-  width: 90%;
-  margin: auto;
+.topPlayerForm {
+  font-size: 20px;
+}
+
+.topPlayerForm select {
+  width: 5rem;
+}
+
+.topPlayerForm option {
+  background-color: rgb(198, 56, 56);
+  color:white;
+}
+
+th {
+  background-color: rgb(50, 97, 228);
+  color:white;
+}
+
+tr{
+  background-color: rgb(158, 180, 251);
+  color:white;
 }

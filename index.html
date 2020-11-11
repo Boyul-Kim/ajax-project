@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script type="text/javascript" src="xmlToJson.js"></script>
+  <script type="text/javascript" src="js/xmlToJson.js"></script>
   <title>AJAX Project</title>
     <link rel="stylesheet" crossorigin="anonymous"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
@@ -17,7 +17,7 @@
     <div class="header-profile-list hidden">
       <div class="row align-items-center">
         <div class="width-20 text-align">Home</div>
-        <div class="width-20 text-align">Stats</div>
+        <div class="width-20 text-align">Depth Chart</div>
         <div class="width-20 text-align">Draft List</div>
       </div>
     </div>
@@ -37,10 +37,10 @@
 
         <div class="row">
           <div class="block">
-              <form action="">
+              <form class="homepageForm" action="">
                 <input type="search" name="search-player" id="search-player" class="homepage-form-search homepage-form-input margin-bottom" placeholder="Search Player Name">
               </form>
-              <button class="homepage-form-search-button homepage-form-input margin-bottom">Search by Stats</button>
+              <button class="homepage-form-search-button homepage-form-input margin-bottom">Depth Chart</button>
               <button class="homepage-form-search-list homepage-form-input">Draft List</button>
           </div>
 
@@ -59,16 +59,39 @@
 
 
         <div class="block player-info">
-          <h3>Draft Rank: </h3>
-          <h3>Position: </h3>
+          <h3 class="team">Team: </h3>
+          <h3 class="position">Position: </h3>
         </div>
 
 
         <div class="row background-color profile-projection-header align-items-center margin-top">
-          Stat Projections:
+          Stats Past 5 Years:
         </div>
 
-        <table class="margin-top">
+        <table class="margin-top table-historical">
+          <thead>
+            <tr>
+              <th>Season</th>
+              <th>PPG</th>
+              <th>APG</th>
+              <th>RPG</th>
+              <th>SPG</th>
+              <th>BPG</th>
+              <th>FT%</th>
+              <th>3PT%</th>
+              <th>TO</th>
+            </tr>
+          </thead>
+          <tbody class="table-historical-body">
+
+          </tbody>
+        </table>
+
+        <div class="row background-color profile-projection-header align-items-center margin-top">
+          Stat Projections for 2020:
+        </div>
+
+        <table class="margin-top table-projections">
           <thead>
             <tr>
               <th>PPG</th>
@@ -81,8 +104,46 @@
               <th>TO</th>
             </tr>
           </thead>
+          <tbody class="table-projections-body">
+            <tr class="table-projections-body-row"></tr>
+          </tbody>
+        </table>
+
+      </div>
+
+      <div data-view="top-players" class="hidden">;
+
+        <div class="row">
+          <h1>Top 25 by Stats</h1>
+        </div>
+
+        <div class="row">
+          <form action="" class="topPlayerForm">
+            <label class="margin-right" for="stats">Select a Stat</label>
+            <select name="stats" id="stats">
+              <option value="stat"></option>
+              <option value="PPG">PPG</option>
+              <option value="APG">APG</option>
+              <option value="RPG">RPG</option>
+              <option value="SPG">SPG</option>
+              <option value="BPG">BPG</option>
+              <option value="FT%">FT%</option>
+              <option value="3PT%">3PT%</option>
+              <option value="TO">TO</option>
+            </select>
+          </form>
+        </div>
+
+        <table class="margin-top">
+          <thead>
+            <tr>
+              <th>Player</th>
+              <th>Stats</th>
+              <th>Position</th>
+            </tr>
+          </thead>
           <tbody>
-            <tr></tr>
+
           </tbody>
         </table>
 

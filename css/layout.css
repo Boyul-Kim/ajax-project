@@ -35,6 +35,10 @@ header {
   margin-top: 1.5rem;
 }
 
+.margin-right {
+  margin-right: 1rem;
+}
+
 .hidden {
   display: none;
 }
@@ -59,7 +63,19 @@ header {
 }
 
 .header-profile-list {
-  font-size: 1.4rem;
   height: 5rem;
   color: white;
+}
+
+table {
+  width: 90%;
+  margin: auto;
+}
+
+tr {
+  text-align: center;
+}
+
+.padding-1 {
+  padding: 1rem;
 }
