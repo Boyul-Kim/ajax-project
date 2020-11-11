@@ -4,6 +4,8 @@ var $tableHistoricalBody = document.querySelector('.table-historical-body');
 var $playerName = document.querySelector('.playerName');
 var $team = document.querySelector('.team');
 var $position = document.querySelector('.position');
+var $tableProjectionBody = document.querySelector('.table-projections-body');
+var $tableProjectionBodyRow = document.querySelector('.table-projections-body-row')
 
 var xml = null;
 function ballProjections() {
@@ -56,15 +58,41 @@ function ballDontLieSeasonAvg(season, id) {
   xhr.addEventListener('load', function () {
     console.log(xhr.response);
     var queryData = ['season', 'pts', 'ast', 'reb', 'stl', 'blk', 'ft_pct', 'fg3_pct', 'turnover'];
-    console.log(xhr.response.data[0][queryData[1]]);
     var $tr = document.createElement('tr');
+    $tr.classList.add(queryData[0]);
     for(var i = 0; i<=queryData.length-1; i++) {
       var $td = document.createElement('td');
       $td.textContent = xhr.response.data[0][queryData[i]];
+      $td.classList.add(queryData[i]);
       $tr.appendChild($td);
     }
     $tableHistoricalBody.appendChild($tr);
 
+    var storage = []
+    for(var x = 1; x<=queryData.length-1; x++) {
+      var name = '.' + queryData[x];
+      var statClass = document.querySelectorAll(name);
+      storage.push(statClass);
+      // dataPoint.textContent = projectionStat;
+      // $tableProjectionBodyRow.appendChild(dataPoint);
+    }
+    console.log(storage);
+    ballDontLieSeasonProjection(storage);
   });
   xhr.send();
+}
+
+function ballDontLieSeasonProjection(storage) {
+
+  for(var i = 0; i<=storage.length-1; i++) {
+    var total = 0;
+    for(var x = 0; x<=storage[i].length-1; x++) {
+      total += Number(storage[i][x].innerHTML);
+    }
+    var average = total/5
+    var dataPoint = document.createElement('td');
+    dataPoint.textContent = Math.round((average + Number.EPSILON) * 100) / 100;
+    console.log(dataPoint);
+  }
+  $tableProjectionBodyRow.appendChild(dataPoint);
 }
