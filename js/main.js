@@ -40,11 +40,13 @@ $depthButton.addEventListener('click', function () {
 $draftButton.addEventListener('click', function () {
   viewSwap(3);
   $header.classList.remove('hidden');
+  draftList();
 });
 
 $listIcon.addEventListener('click', function ()  {
   viewSwap(3);
   $header.classList.remove('hidden');
+  draftList();
 });
 
 //when user enters player name in search bar, then page will change to profile view
@@ -68,28 +70,31 @@ $option.addEventListener('click', function(e) {
 
 //add player to local storage
 function addPlayer() {
-
   addButton.classList.add('red-color');
   var positionCut = $position.textContent.split(' ');
-  //console.log(positionCut[1]);
   data.profile.name = $playerName.textContent;
   data.profile.position = positionCut[1];
   data.entries.push(data.profile);
-
-  // var $trAdd = document.createElement('tr');
-
-  // var $tdAddName = document.createElement('td');
-  // $tdAddName.textContent = $playerName.textContent;
-  // $trAdd.appendChild($tdAddName);
-
-  // var $tdAddPosition = document.createElement('td');
-  // $tdAddPosition.textContent = positionCut[1];
-  // $trAdd.appendChild($tdAddPosition);
-
-  // var removeButton = document.createElement('button')
-  // removeButton.textContent = 'Remove';
-  // $trAdd.appendChild(removeButton);
-
-  // $tableDraftListBody.appendChild($trAdd);
 }
 addButton.addEventListener('click', addPlayer);
+
+function draftList() {
+  $tableDraftListBody.innerHTML = '';
+  for(var i = 0; i<=data.entries.length-1; i++) {
+    var $trAdd = document.createElement('tr');
+    var $tdAddName = document.createElement('td');
+    $tdAddName.textContent = data.entries[i].name;
+    $trAdd.appendChild($tdAddName);
+
+    var $tdAddPosition = document.createElement('td');
+    $tdAddPosition.textContent = data.entries[i].position;
+    $trAdd.appendChild($tdAddPosition);
+
+    var removeButton = document.createElement('button')
+    removeButton.textContent = 'Remove';
+    $trAdd.appendChild(removeButton);
+
+    $tableDraftListBody.appendChild($trAdd);
+  }
+
+}
