@@ -60,6 +60,8 @@ function ballDontLie(player) {
         var playerID
         playerID = xhr.response.data[0].id;
         $playerName.textContent = xhr.response.data[0].first_name + ' ' + xhr.response.data[0].last_name;
+        // data.profile.name = xhr.response.data[0].first_name + ' ' + xhr.response.data[0].last_name;
+        // data.profile.position = xhr.response.data[0].position;
         $team.textContent = 'Team: ' + xhr.response.data[0].team.abbreviation;
         $position.textContent = 'Position: ' + xhr.response.data[0].position;
         for(var i = 2015; i<=2020; i++) {

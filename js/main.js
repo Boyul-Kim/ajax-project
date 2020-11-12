@@ -25,28 +25,33 @@ function viewSwap(index) {
 $homeIcon.addEventListener('click', function()  {
   viewSwap(0);
   $header.classList.add('hidden');
+  addButton.classList.remove('red-color');
 });
 
 $chartIcon.addEventListener('click', function() {
   viewSwap(2);
   $header.classList.remove('hidden');
+  addButton.classList.remove('red-color');
 })
 
 $depthButton.addEventListener('click', function () {
   viewSwap(2);
   $header.classList.remove('hidden');
+  addButton.classList.remove('red-color');
 })
 
 $draftButton.addEventListener('click', function () {
   viewSwap(3);
   $header.classList.remove('hidden');
-  //draftList();
+  addButton.classList.remove('red-color');
+  draftList();
 });
 
 $listIcon.addEventListener('click', function ()  {
   viewSwap(3);
   $header.classList.remove('hidden');
-  //draftList();
+  addButton.classList.remove('red-color');
+  draftList();
 });
 
 //when user enters player name in search bar, then page will change to profile view
@@ -77,7 +82,10 @@ function addPlayer() {
   var positionCut = $position.textContent.split(' ');
   data.profile.name = $playerName.textContent;
   data.profile.position = positionCut[1];
-  data.entries.push(data.profile);
+  var playerProfile = [];
+  playerProfile.push(data.profile.name);
+  playerProfile.push(data.profile.position);
+  data.entries.push(playerProfile);
   draftList();
 }
 addButton.addEventListener('click', addPlayer);
@@ -87,11 +95,11 @@ function draftList() {
   for(var i = 0; i<=data.entries.length-1; i++) {
     var $trAdd = document.createElement('tr');
     var $tdAddName = document.createElement('td');
-    $tdAddName.textContent = data.entries[i].name;
+    $tdAddName.textContent = data.entries[i][0];
     $trAdd.appendChild($tdAddName);
 
     var $tdAddPosition = document.createElement('td');
-    $tdAddPosition.textContent = data.entries[i].position;
+    $tdAddPosition.textContent = data.entries[i][1];
     $trAdd.appendChild($tdAddPosition);
 
     var removeButton = document.createElement('button')
