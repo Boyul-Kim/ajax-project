@@ -40,19 +40,22 @@ $depthButton.addEventListener('click', function () {
 $draftButton.addEventListener('click', function () {
   viewSwap(3);
   $header.classList.remove('hidden');
-  draftList();
+  //draftList();
 });
 
 $listIcon.addEventListener('click', function ()  {
   viewSwap(3);
   $header.classList.remove('hidden');
-  draftList();
+  //draftList();
 });
 
 //when user enters player name in search bar, then page will change to profile view
 $homepageForm.addEventListener('submit', function(e) {
+  $tableHistoricalBody.innerHTML = '';
+  $tableProjectionBodyRow.innerHTML = '';
   e.preventDefault();
   ballDontLie($homepageSearch.value);
+  storage = [];
   dataView[0].classList.add('hidden');
   dataView[1].classList.remove('hidden');
   $header.classList.remove('hidden');
@@ -75,6 +78,7 @@ function addPlayer() {
   data.profile.name = $playerName.textContent;
   data.profile.position = positionCut[1];
   data.entries.push(data.profile);
+  draftList();
 }
 addButton.addEventListener('click', addPlayer);
 

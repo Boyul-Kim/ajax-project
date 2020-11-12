@@ -51,7 +51,10 @@ function ballDontLie(player) {
   xhr.open('GET', 'https://www.balldontlie.io/api/v1/players?search=' + player);
   xhr.responseType = 'json';
   xhr.addEventListener('load', function () {
+    var storage = [];
     if(xhr.status === 200) {
+      $tableHistoricalBody.innerHTML = '';
+      $tableProjectionBodyRow.innerHTML = '';
       var firstLast = player.split(' ');
       if ((firstLast[0].toLowerCase() === xhr.response.data[0].first_name.toLowerCase()) && (firstLast[1].toLowerCase() === xhr.response.data[0].last_name.toLowerCase())) {
         var playerID
@@ -98,24 +101,21 @@ function ballDontLieSeasonAvg(season, id) {
       // dataPoint.textContent = projectionStat;
       // $tableProjectionBodyRow.appendChild(dataPoint);
     }
-    //console.log(storage);
     ballDontLieSeasonProjection(storage);
   });
   xhr.send();
 }
 
-function ballDontLieSeasonProjection(storage) {
-
-  for(var i = 32; i<=storage.length-1; i++) {
+function ballDontLieSeasonProjection(storage2) {
+  $tableProjectionBodyRow.innerHTML = '';
+  for(var i = 32; i<=storage2.length-1; i++) {
     var total = 0;
-    for(var x = 0; x<=storage[i].length-1; x++) {
-      total += Number(storage[i][x].innerHTML);
+    for(var x = 0; x<=storage2[i].length-1; x++) {
+      total += Number(storage2[i][x].innerHTML);
     }
     var average = total/5
     var dataPoint = document.createElement('td');
     dataPoint.textContent = Math.round((average + Number.EPSILON) * 100) / 100;
-    //console.log(dataPoint);
-    $tableProjectionBodyRow.appendChild(dataPoint);
+    $tableProjectionBodyRow.appendChild(dataPoint)
   }
-
 }
