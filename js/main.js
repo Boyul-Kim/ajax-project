@@ -11,6 +11,8 @@ var $chartIcon = document.querySelector('.fa-chart-line');
 var $listIcon = document.querySelector('.fa-list');
 var $depthButton = document.querySelector('.homepage-form-search-button');
 var $draftButton = document.querySelector('.homepage-form-search-list');
+var $rankButton = document.querySelector('.homepage-form-search-rank');
+var $rankIcon = document.querySelector('.fa-sort-numeric-down');
 
 function viewSwap(index) {
   for(var i = 0; i<=dataView.length-1; i++) {
@@ -52,6 +54,18 @@ $listIcon.addEventListener('click', function ()  {
   $header.classList.remove('hidden');
   addButton.classList.remove('red-color');
   draftList();
+});
+
+$rankButton.addEventListener('click', function () {
+  viewSwap(4);
+  $header.classList.remove('hidden');
+  addButton.classList.remove('red-color');
+});
+
+$rankIcon.addEventListener('click', function () {
+  viewSwap(4);
+  $header.classList.remove('hidden');
+  addButton.classList.remove('red-color');
 });
 
 //when user enters player name in search bar, then page will change to profile view

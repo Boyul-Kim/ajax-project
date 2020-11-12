@@ -18,6 +18,7 @@
       <div class="row align-items-center">
         <div class="width-20 text-align"><i class="fas fa-home fa-2x"></i></div>
         <div class="width-20 text-align"><i class="fas fa-chart-line fa-2x"></i></div>
+        <div class="width-20 text-align"><i class="fas fa-sort-numeric-down fa-2x"></i></div>
         <div class="width-20 text-align"><i class="fas fa-list fa-2x"></i></div>
       </div>
     </div>
@@ -38,10 +39,11 @@
         <div class="row">
           <div class="block">
               <form class="homepageForm" action="">
-                <input type="search" name="search-player" id="search-player" class="homepage-form-search homepage-form-input margin-bottom" placeholder="Search Player Name">
+                <input type="search" name="search-player" id="search-player" class="homepage-form-search homepage-form-input margin-bottom-half" placeholder="Search Player Name">
               </form>
-              <button class="homepage-form-search-button homepage-form-input margin-bottom">Depth Chart</button>
-              <button class="homepage-form-search-list homepage-form-input">Draft List</button>
+              <button class="homepage-form-search-button homepage-form-input margin-bottom-half">Depth Chart</button>
+              <button class="homepage-form-search-list homepage-form-input margin-bottom-half">Draft List</button>
+              <button class="homepage-form-search-rank homepage-form-input">Draft Rank</button>
           </div>
 
         </div>
@@ -112,7 +114,7 @@
 
       </div>
 
-      <div data-view="top-players" class="hidden">;
+      <div data-view="top-players" class="hidden">
 
         <div class="row">
           <h1>Top 25 by Stats</h1>
@@ -170,6 +172,24 @@
         </table>
 
       </div>
+
+      <div data-view="draft-rank" class="hidden">
+        <div class="row">
+          <h1 class="draft-rank-title">Draft Rank</h1>
+        </div>
+        <table class="margin-top table-rank">
+          <thead>
+            <tr>
+              <th>Rank</th>
+              <th>Player</th>
+            </tr>
+          </thead>
+          <tbody class="table-rank-body">
+
+          </tbody>
+        </table>
+      </div>
+
 
     </div>
   </main>

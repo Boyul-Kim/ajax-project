@@ -7,6 +7,7 @@ var $position = document.querySelector('.position');
 var $tableProjectionBody = document.querySelector('.table-projections-body');
 var $tableProjectionBodyRow = document.querySelector('.table-projections-body-row');
 var $draftProjection = document.querySelector('.projection');
+var $tableRankBody = document.querySelector('.table-rank-body');
 var storage = []
 
 var data = {
@@ -31,7 +32,7 @@ window.addEventListener('beforeunload', profileStorage);
 
 //used for fantasybasektballnerd api
 var xml = null;
-var jsonParse = null;
+var jsonParse = null; //holds data from fantasybballnerd
 function ballProjections() {
   var xhr = new XMLHttpRequest();
   xhr.open('GET', 'https://cors-anywhere.herokuapp.com/https://www.fantasybasketballnerd.com/service/draft-projections');
@@ -44,6 +45,7 @@ function ballProjections() {
     var jsonString = JSON.stringify(xmlToJson(xml));
     jsonParse = JSON.parse(jsonString)
     console.log('to JSON', jsonParse);
+    ballProjectionsRankList();
   });
   xhr.send();
 }
@@ -53,9 +55,6 @@ function ballProjectionsFindPlayer(player) { //will look through draft projectio
   var playerDB = jsonParse.FantasyBasketballNerd.Player;
   for (var i = 0; i <= playerDB.length - 1; i++) {
     if(playerDB[i].name['#text'] === player) {
-      var queryData = ['Games', 'pts', 'ast', 'reb', 'stl', 'blk', 'ft_pct', 'fg3_pct', 'turnover'];
-      console.log('success');
-      console.log(playerDB[i]); //player stats
       $draftProjection.textContent = 'Draft Rank: ' + (playerDB.indexOf(playerDB[i]) + 1);
       var games = Number(playerDB[i].Games["#text"]);
       var points = document.createElement('td');
@@ -93,6 +92,20 @@ function ballProjectionsFindPlayer(player) { //will look through draft projectio
   }
 }
 
+function ballProjectionsRankList() {
+  for(var i = 0; i<=199 ; i++) {
+    var $tr = document.createElement('tr');
+    var $rank = document.createElement('td');
+    var $player = document.createElement('td');
+
+    $rank.textContent = jsonParse.FantasyBasketballNerd.Player.indexOf(jsonParse.FantasyBasketballNerd.Player[i]) + 1;
+    $tr.appendChild($rank);
+    $player.textContent = jsonParse.FantasyBasketballNerd.Player[i].name["#text"];
+    $tr.appendChild($player);
+
+    $tableRankBody.appendChild($tr);
+  }
+}
 
 
 function ballDontLie(player) {
