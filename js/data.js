@@ -6,6 +6,7 @@ var $team = document.querySelector('.team');
 var $position = document.querySelector('.position');
 var $tableProjectionBody = document.querySelector('.table-projections-body');
 var $tableProjectionBodyRow = document.querySelector('.table-projections-body-row');
+var $draftProjection = document.querySelector('.projection');
 var storage = []
 
 var data = {
@@ -30,6 +31,7 @@ window.addEventListener('beforeunload', profileStorage);
 
 //used for fantasybasektballnerd api
 var xml = null;
+var jsonParse = null;
 function ballProjections() {
   var xhr = new XMLHttpRequest();
   xhr.open('GET', 'https://cors-anywhere.herokuapp.com/https://www.fantasybasketballnerd.com/service/draft-projections');
@@ -40,10 +42,57 @@ function ballProjections() {
     xml = xhr.response;
     console.log('xml', xml);
     var jsonString = JSON.stringify(xmlToJson(xml));
-    console.log('to JSON', JSON.parse(jsonString));
+    jsonParse = JSON.parse(jsonString)
+    console.log('to JSON', jsonParse);
   });
   xhr.send();
 }
+ballProjections();
+
+function ballProjectionsFindPlayer(player) { //will look through draft projection list and match from profile text content
+  var playerDB = jsonParse.FantasyBasketballNerd.Player;
+  for (var i = 0; i <= playerDB.length - 1; i++) {
+    if(playerDB[i].name['#text'] === player) {
+      var queryData = ['Games', 'pts', 'ast', 'reb', 'stl', 'blk', 'ft_pct', 'fg3_pct', 'turnover'];
+      console.log('success');
+      console.log(playerDB[i]); //player stats
+      $draftProjection.textContent = 'Draft Rank: ' + (playerDB.indexOf(playerDB[i]) + 1);
+      var games = Number(playerDB[i].Games["#text"]);
+      var points = document.createElement('td');
+      points.textContent = Math.round(((Number(playerDB[i].PTS["#text"]) / games) + Number.EPSILON) * 100) / 100;
+      $tableProjectionBodyRow.appendChild(points);
+
+      var assists = document.createElement('td');
+      assists.textContent = Math.round(((Number(playerDB[i].AST["#text"]) / games) + Number.EPSILON) * 100) / 100;
+      $tableProjectionBodyRow.appendChild(assists);
+
+      var rebounds = document.createElement('td');
+      rebounds.textContent = Math.round(((Number(playerDB[i].REB["#text"]) / games) + Number.EPSILON) * 100) / 100;
+      $tableProjectionBodyRow.appendChild(rebounds);
+
+      var steals = document.createElement('td');
+      steals.textContent = Math.round(((Number(playerDB[i].STL["#text"]) / games) + Number.EPSILON) * 100) / 100;
+      $tableProjectionBodyRow.appendChild(steals);
+
+      var blocks = document.createElement('td');
+      blocks.textContent = Math.round(((Number(playerDB[i].BLK["#text"]) / games) + Number.EPSILON) * 100) / 100;
+      $tableProjectionBodyRow.appendChild(blocks);
+
+      var freethrow = document.createElement('td');
+      freethrow.textContent = Math.round(((Number(playerDB[i].FT["#text"])) + Number.EPSILON) * 100) / 100;
+      $tableProjectionBodyRow.appendChild(freethrow);
+
+      var threepoint = document.createElement('td');
+      threepoint.textContent = Math.round(((Number(playerDB[i].THREES["#text"]) / games) + Number.EPSILON) * 100) / 100;
+      $tableProjectionBodyRow.appendChild(threepoint);
+
+      var turnover = document.createElement('td');
+      turnover.textContent = Math.round(((Number(playerDB[i].TO["#text"]) / games) + Number.EPSILON) * 100) / 100;
+      $tableProjectionBodyRow.appendChild(turnover);
+    }
+  }
+}
+
 
 
 function ballDontLie(player) {
@@ -64,6 +113,7 @@ function ballDontLie(player) {
         // data.profile.position = xhr.response.data[0].position;
         $team.textContent = 'Team: ' + xhr.response.data[0].team.abbreviation;
         $position.textContent = 'Position: ' + xhr.response.data[0].position;
+        ballProjectionsFindPlayer($playerName.textContent);
         for(var i = 2015; i<=2020; i++) {
           ballDontLieSeasonAvg(i, playerID);
         }
@@ -100,24 +150,7 @@ function ballDontLieSeasonAvg(season, id) {
       var name = '.' + queryData[x];
       var statClass = document.querySelectorAll(name);
       storage.push(statClass);
-      // dataPoint.textContent = projectionStat;
-      // $tableProjectionBodyRow.appendChild(dataPoint);
     }
-    ballDontLieSeasonProjection(storage);
   });
   xhr.send();
-}
-
-function ballDontLieSeasonProjection(storage2) {
-  $tableProjectionBodyRow.innerHTML = '';
-  for(var i = 32; i<=storage2.length-1; i++) {
-    var total = 0;
-    for(var x = 0; x<=storage2[i].length-1; x++) {
-      total += Number(storage2[i][x].innerHTML);
-    }
-    var average = total/5
-    var dataPoint = document.createElement('td');
-    dataPoint.textContent = Math.round((average + Number.EPSILON) * 100) / 100;
-    $tableProjectionBodyRow.appendChild(dataPoint)
-  }
 }
