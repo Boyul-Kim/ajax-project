@@ -37,7 +37,7 @@ var xml = null;
 var jsonParse = null; //holds data from fantasybballnerd
 function ballProjections() {
   var xhr = new XMLHttpRequest();
-  xhr.open('GET', 'https://cors-anywhere.herokuapp.com/https://www.fantasybasketballnerd.com/service/draft-projections');
+  xhr.open('GET', 'https://api.codetabs.com/v1/proxy?quest=https://www.fantasybasketballnerd.com/service/draft-projections');
   xhr.responseType = 'document';
   xhr.addEventListener('load', function () {
     //console.log(xhr.status);
@@ -119,6 +119,23 @@ function ballProjectionsRankList() {
   }
 }
 
+function depthChart(code) {
+  var xhr = new XMLHttpRequest();
+  xhr.open('GET', 'https://api.codetabs.com/v1/proxy?quest=https://www.fantasybasketballnerd.com/service/depth/' + code);
+  xhr.responseType = 'document';
+  xhr.addEventListener('load', function () {
+    //console.log(xhr.status);
+    //console.log(xhr.response);
+    xml = xhr.response;
+    //console.log('xml', xml);
+    var jsonString = JSON.stringify(xmlToJson(xml));
+    jsonParse = JSON.parse(jsonString)
+    console.log('to JSON', jsonParse);
+  });
+  xhr.send();
+}
+
+depthChart('BOS');
 
 function ballDontLie(player) {
   var xhr = new XMLHttpRequest();
