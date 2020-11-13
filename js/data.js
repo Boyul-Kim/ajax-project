@@ -39,17 +39,27 @@ function ballProjections() {
   xhr.responseType = 'document';
   xhr.addEventListener('load', function () {
     console.log(xhr.status);
-    console.log(xhr.response);
+    //console.log(xhr.response);
     xml = xhr.response;
-    console.log('xml', xml);
+    //console.log('xml', xml);
     var jsonString = JSON.stringify(xmlToJson(xml));
     jsonParse = JSON.parse(jsonString)
     console.log('to JSON', jsonParse);
     ballProjectionsRankList();
+    console.log($tableRankBody.childNodes[1].childNodes[1].textContent);
+    for(var i = 1; i<=$tableRankBody.childNodes.length-1; i++) {
+      $tableRankBody.childNodes[i].childNodes[1].addEventListener('click', function (e) {
+        ballDontLie(e.target.textContent);
+        dataView[4].classList.add('hidden');
+        dataView[1].classList.remove('hidden');
+        $header.classList.remove('hidden');
+      })
+    }
   });
   xhr.send();
 }
 ballProjections();
+
 
 function ballProjectionsFindPlayer(player) { //will look through draft projection list and match from profile text content
   var playerDB = jsonParse.FantasyBasketballNerd.Player;
@@ -98,11 +108,12 @@ function ballProjectionsRankList() {
     var $rank = document.createElement('td');
     var $player = document.createElement('td');
 
+    $player.classList.add('tableRankDataPlayer');
+
     $rank.textContent = jsonParse.FantasyBasketballNerd.Player.indexOf(jsonParse.FantasyBasketballNerd.Player[i]) + 1;
     $tr.appendChild($rank);
     $player.textContent = jsonParse.FantasyBasketballNerd.Player[i].name["#text"];
     $tr.appendChild($player);
-
     $tableRankBody.appendChild($tr);
   }
 }
@@ -122,8 +133,6 @@ function ballDontLie(player) {
         var playerID
         playerID = xhr.response.data[0].id;
         $playerName.textContent = xhr.response.data[0].first_name + ' ' + xhr.response.data[0].last_name;
-        // data.profile.name = xhr.response.data[0].first_name + ' ' + xhr.response.data[0].last_name;
-        // data.profile.position = xhr.response.data[0].position;
         $team.textContent = 'Team: ' + xhr.response.data[0].team.abbreviation;
         $position.textContent = 'Position: ' + xhr.response.data[0].position;
         ballProjectionsFindPlayer($playerName.textContent);
