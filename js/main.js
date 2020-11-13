@@ -1,5 +1,6 @@
 var addButton = document.querySelector('.fa-plus');
 var dataView = document.querySelectorAll('[data-view]');
+var dataButton = document.querySelectorAll('[data-button]');
 var $homepageForm = document.querySelector('.homepageForm');
 var $homepageSearch = document.querySelector('.homepage-form-search');
 var $header = document.querySelector('.header-profile-list');
@@ -13,6 +14,7 @@ var $depthButton = document.querySelector('.homepage-form-search-button');
 var $draftButton = document.querySelector('.homepage-form-search-list');
 var $rankButton = document.querySelector('.homepage-form-search-rank');
 var $rankIcon = document.querySelector('.fa-sort-numeric-down');
+
 
 function viewSwap(index) {
   for(var i = 0; i<=dataView.length-1; i++) {
@@ -40,8 +42,8 @@ $chartIcon.addEventListener('click', function() {
   headerShow(2);
 })
 
-$depthButton.addEventListener('click', function () {
-  headerShow(2);
+$depthButton.addEventListener('click', function (e) {
+  headerShow(Number(e.target.value));
 })
 
 $draftButton.addEventListener('click', function () {
