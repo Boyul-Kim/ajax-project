@@ -8,6 +8,8 @@ var $tableProjectionBody = document.querySelector('.table-projections-body');
 var $tableProjectionBodyRow = document.querySelector('.table-projections-body-row');
 var $draftProjection = document.querySelector('.projection');
 var $tableRankBody = document.querySelector('.table-rank-body');
+var $topPlayerFormTeam = document.querySelector('.topPlayerForm-team');
+
 var storage = []
 
 var data = {
@@ -38,15 +40,15 @@ function ballProjections() {
   xhr.open('GET', 'https://cors-anywhere.herokuapp.com/https://www.fantasybasketballnerd.com/service/draft-projections');
   xhr.responseType = 'document';
   xhr.addEventListener('load', function () {
-    console.log(xhr.status);
+    //console.log(xhr.status);
     //console.log(xhr.response);
     xml = xhr.response;
     //console.log('xml', xml);
     var jsonString = JSON.stringify(xmlToJson(xml));
     jsonParse = JSON.parse(jsonString)
-    console.log('to JSON', jsonParse);
+    //console.log('to JSON', jsonParse);
     ballProjectionsRankList();
-    console.log($tableRankBody.childNodes[1].childNodes[1].textContent);
+    //console.log($tableRankBody.childNodes[1].childNodes[1].textContent);
     for(var i = 1; i<=$tableRankBody.childNodes.length-1; i++) {
       $tableRankBody.childNodes[i].childNodes[1].addEventListener('click', function (e) {
         ballDontLie(e.target.textContent);
@@ -59,7 +61,6 @@ function ballProjections() {
   xhr.send();
 }
 ballProjections();
-
 
 function ballProjectionsFindPlayer(player) { //will look through draft projection list and match from profile text content
   var playerDB = jsonParse.FantasyBasketballNerd.Player;
@@ -176,3 +177,20 @@ function ballDontLieSeasonAvg(season, id) {
   });
   xhr.send();
 }
+
+function getTeams() {
+  var xhr = new XMLHttpRequest();
+  xhr.open('GET', 'https://www.balldontlie.io/api/v1/teams');
+  xhr.responseType = 'json';
+  xhr.addEventListener('load', function()  {
+    for(var i = 0; i<=xhr.response.data.length-1; i++) {
+      var $option = document.createElement('option');
+      $option.textContent = xhr.response.data[i].abbreviation;
+      $topPlayerFormTeam.appendChild($option);
+    }
+  })
+  xhr.send();
+
+}
+
+getTeams();

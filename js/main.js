@@ -81,10 +81,25 @@ $homepageForm.addEventListener('submit', function(e) {
 });
 
 //for dropdown menu
-var $option = document.querySelector('.topPlayerForm');
-$option.addEventListener('click', function(e) {
-  console.log(e.target.value);
-});
+var flip = true;
+var $option = document.querySelector('.topPlayerForm-team');
+
+// $option.addEventListener('click', function(e) {
+//   flipWest = !flipWest;
+//   if(flipWest === true) {
+//     console.log(e.target.value);
+//   }
+// });
+
+function dropDownSelector(element, flip) {
+  element.addEventListener('click', function(e) {
+    flip = !flip;
+    if(flip === true) {
+      console.log(e.target.value);
+    }
+  })
+}
+dropDownSelector($option, flip);;
 
 //add player to local storage
 function addPlayer() {
