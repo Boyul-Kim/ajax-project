@@ -30,42 +30,36 @@ $homeIcon.addEventListener('click', function()  {
   addButton.classList.remove('red-color');
 });
 
-$chartIcon.addEventListener('click', function() {
-  viewSwap(2);
+function headerShow(index) {
+  viewSwap(index);
   $header.classList.remove('hidden');
   addButton.classList.remove('red-color');
+}
+
+$chartIcon.addEventListener('click', function() {
+  headerShow(2);
 })
 
 $depthButton.addEventListener('click', function () {
-  viewSwap(2);
-  $header.classList.remove('hidden');
-  addButton.classList.remove('red-color');
+  headerShow(2);
 })
 
 $draftButton.addEventListener('click', function () {
-  viewSwap(3);
-  $header.classList.remove('hidden');
-  addButton.classList.remove('red-color');
+  headerShow(3);
   draftList();
 });
 
 $listIcon.addEventListener('click', function ()  {
-  viewSwap(3);
-  $header.classList.remove('hidden');
-  addButton.classList.remove('red-color');
+  headerShow(3);
   draftList();
 });
 
 $rankButton.addEventListener('click', function () {
-  viewSwap(4);
-  $header.classList.remove('hidden');
-  addButton.classList.remove('red-color');
+  headerShow(4);
 });
 
 $rankIcon.addEventListener('click', function () {
-  viewSwap(4);
-  $header.classList.remove('hidden');
-  addButton.classList.remove('red-color');
+  headerShow(4);
 });
 
 //when user enters player name in search bar, then page will change to profile view
