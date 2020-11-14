@@ -119,23 +119,39 @@ function ballProjectionsRankList() {
   }
 }
 
-function depthChart(code) {
+var jsonParseDepth = null;
+function depthChart(team, letter) {
   var xhr = new XMLHttpRequest();
-  xhr.open('GET', 'https://api.codetabs.com/v1/proxy?quest=https://www.fantasybasketballnerd.com/service/depth/' + code);
+  xhr.open('GET', 'https://api.codetabs.com/v1/proxy?quest=https://www.fantasybasketballnerd.com/service/depth/' + team);
   xhr.responseType = 'document';
   xhr.addEventListener('load', function () {
-    //console.log(xhr.status);
-    //console.log(xhr.response);
     xml = xhr.response;
-    //console.log('xml', xml);
     var jsonString = JSON.stringify(xmlToJson(xml));
-    jsonParse = JSON.parse(jsonString)
-    console.log('to JSON', jsonParse);
+    jsonParseDepth = JSON.parse(jsonString)
+    console.log('to JSON', jsonParseDepth);
+    var position = null;
+    for (var x = 0; x <= jsonParseDepth.FantasyBasketballNerd.Team.Position.length-1; x++) {
+      if (jsonParseDepth.FantasyBasketballNerd.Team.Position[x]["@attributes"].position === letter) {
+        position = x;
+      }
+    }
+
+    var $topPlayerFormBody = document.querySelector('.topPlayerForm-body');
+    for (var i = 0; i <= jsonParseDepth.FantasyBasketballNerd.Team.Position.length-1; i++) {
+      var $tr = document.createElement('tr');
+      var $rank = document.createElement('td');
+      var $player = document.createElement('td');
+
+      $rank.textContent = jsonParseDepth.FantasyBasketballNerd.Team.Position[position].Player[i].rank['#text'];
+      $player.textContent = jsonParseDepth.FantasyBasketballNerd.Team.Position[position].Player[i].name['#text'];
+      $tr.appendChild($rank);
+      $tr.appendChild($player);
+      $topPlayerFormBody.appendChild($tr);
+    }
   });
   xhr.send();
 }
-
-depthChart('BOS');
+//depthChart('BOS',2);
 
 function ballDontLie(player) {
   var xhr = new XMLHttpRequest();
