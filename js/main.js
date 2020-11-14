@@ -80,26 +80,28 @@ $homepageForm.addEventListener('submit', function(e) {
   $homepageSearch.value = '';
 });
 
-//for dropdown menu
+//for dropdown menu team
 var flip = true;
 var $option = document.querySelector('.topPlayerForm-team');
+var team = null;
+$option.addEventListener('click', function(e) {
+  flip = !flip;
+  if(flip === true) {
+    team = e.target.value;
+  }
+});
 
-// $option.addEventListener('click', function(e) {
-//   flipWest = !flipWest;
-//   if(flipWest === true) {
-//     console.log(e.target.value);
-//   }
-// });
-
-function dropDownSelector(element, flip) {
-  element.addEventListener('click', function(e) {
-    flip = !flip;
-    if(flip === true) {
-      console.log(e.target.value);
-    }
-  })
-}
-dropDownSelector($option, flip);;
+//for dropdown menu position
+var positionSwitch = true;
+var $optionPosition = document.querySelector('.topPlayerForm-position');
+$optionPosition.addEventListener('click', function(e) {
+  var $topPlayerFormBody = document.querySelector('.topPlayerForm-body');
+  $topPlayerFormBody.innerHTML = '';
+  positionSwitch = !positionSwitch;
+  if (positionSwitch === true) {
+    depthChart(team, e.target.value);
+  }
+})
 
 //add player to local storage
 function addPlayer() {

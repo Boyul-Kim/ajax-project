@@ -32,7 +32,7 @@
           <h1 class="homepage-title">Fantasy Basketball Draft App</h1>
         </div>
 
-        <div class="row homepage-image margin-bottom">
+        <div class="row homepage-image margin-bottom-half">
           <img src="nba.png" alt="">
         </div>
 
@@ -117,26 +117,42 @@
       <div data-view="top-players" class="hidden">
 
         <div class="row">
-          <h1>Top 25 by Stats</h1>
+          <h1 class="text-align">Depth Chart by Teams</h1>
         </div>
 
         <div class="row">
           <form action="" class="topPlayerForm">
-            <label class="margin-right" for="stats">West</label>
-            <select name="teamWest" id="teamWest" class="topPlayerForm-team">
-              <option value="Teams">Teams</option>
-            </select>
+
+            <div class="row margin-bottom-half">
+              <label class="margin-right" for="stats">Team</label>
+              <select name="team" id="team" class="topPlayerForm-team">
+                <option value="Teams">Teams</option>
+              </select>
+            </div>
+
+            <div class="row">
+              <label class="margin-right" for="stats">Position</label>
+              <select name="position" id="position" class="topPlayerForm-position">
+                <option value="Position">Position</option>
+                <option value="PG">PG</option>
+                <option value="SG">SG</option>
+                <option value="SF">SF</option>
+                <option value="PF">PF</option>
+                <option value="C">C</option>
+              </select>
+            </div>
+
           </form>
         </div>
 
         <table class="margin-top">
           <thead>
             <tr>
+              <th>Rank</th>
               <th>Player</th>
-              <th>Position</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody class="topPlayerForm-body">
 
           </tbody>
         </table>

@@ -37,7 +37,7 @@ var xml = null;
 var jsonParse = null; //holds data from fantasybballnerd
 function ballProjections() {
   var xhr = new XMLHttpRequest();
-  xhr.open('GET', 'https://cors-anywhere.herokuapp.com/https://www.fantasybasketballnerd.com/service/draft-projections');
+  xhr.open('GET', 'https://api.codetabs.com/v1/proxy?quest=https://www.fantasybasketballnerd.com/service/draft-projections');
   xhr.responseType = 'document';
   xhr.addEventListener('load', function () {
     //console.log(xhr.status);
@@ -119,6 +119,48 @@ function ballProjectionsRankList() {
   }
 }
 
+var jsonParseDepth = null;
+function depthChart(team, letter) {
+  var xhr = new XMLHttpRequest();
+  xhr.open('GET', 'https://api.codetabs.com/v1/proxy?quest=https://www.fantasybasketballnerd.com/service/depth/' + team);
+  xhr.responseType = 'document';
+  xhr.addEventListener('load', function () {
+    xml = xhr.response;
+    var jsonString = JSON.stringify(xmlToJson(xml));
+    jsonParseDepth = JSON.parse(jsonString)
+    //console.log('to JSON', jsonParseDepth);
+    var position = null;
+    for (var x = 0; x <= jsonParseDepth.FantasyBasketballNerd.Team.Position.length-1; x++) {
+      if (jsonParseDepth.FantasyBasketballNerd.Team.Position[x]["@attributes"].position === letter) {
+        position = x;
+      }
+    }
+
+    var $topPlayerFormBody = document.querySelector('.topPlayerForm-body');
+    for (var i = 0; i <= jsonParseDepth.FantasyBasketballNerd.Team.Position.length-1; i++) {
+      var $tr = document.createElement('tr');
+      var $rank = document.createElement('td');
+      var $player = document.createElement('td');
+
+      $rank.textContent = jsonParseDepth.FantasyBasketballNerd.Team.Position[position].Player[i].rank['#text'];
+      $player.textContent = jsonParseDepth.FantasyBasketballNerd.Team.Position[position].Player[i].name['#text'];
+      $tr.appendChild($rank);
+      $tr.appendChild($player);
+      $topPlayerFormBody.appendChild($tr);
+    }
+
+    for (var i = 0; i <= $topPlayerFormBody.childNodes.length - 1; i++) {
+      $topPlayerFormBody.childNodes[i].childNodes[1].addEventListener('click', function (e) {
+        ballDontLie(e.target.textContent);
+        dataView[2].classList.add('hidden');
+        dataView[1].classList.remove('hidden');
+        $header.classList.remove('hidden');
+      })
+    }
+
+  });
+  xhr.send();
+}
 
 function ballDontLie(player) {
   var xhr = new XMLHttpRequest();
