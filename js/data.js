@@ -128,7 +128,7 @@ function depthChart(team, letter) {
     xml = xhr.response;
     var jsonString = JSON.stringify(xmlToJson(xml));
     jsonParseDepth = JSON.parse(jsonString)
-    console.log('to JSON', jsonParseDepth);
+    //console.log('to JSON', jsonParseDepth);
     var position = null;
     for (var x = 0; x <= jsonParseDepth.FantasyBasketballNerd.Team.Position.length-1; x++) {
       if (jsonParseDepth.FantasyBasketballNerd.Team.Position[x]["@attributes"].position === letter) {
@@ -148,10 +148,19 @@ function depthChart(team, letter) {
       $tr.appendChild($player);
       $topPlayerFormBody.appendChild($tr);
     }
+
+    for (var i = 0; i <= $topPlayerFormBody.childNodes.length - 1; i++) {
+      $topPlayerFormBody.childNodes[i].childNodes[1].addEventListener('click', function (e) {
+        ballDontLie(e.target.textContent);
+        dataView[2].classList.add('hidden');
+        dataView[1].classList.remove('hidden');
+        $header.classList.remove('hidden');
+      })
+    }
+
   });
   xhr.send();
 }
-//depthChart('BOS',2);
 
 function ballDontLie(player) {
   var xhr = new XMLHttpRequest();
