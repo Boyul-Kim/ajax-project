@@ -52,15 +52,10 @@ function ballProjections() {
     if (xhr.status === 200) {
       viewSwap(0);
       $header.classList.add('hidden');
-      //console.log(xhr.status);
-      //console.log(xhr.response);
       xml = xhr.response;
-      //console.log('xml', xml);
       var jsonString = JSON.stringify(xmlToJson(xml));
       jsonParse = JSON.parse(jsonString)
-      //console.log('to JSON', jsonParse);
       ballProjectionsRankList();
-      //console.log($tableRankBody.childNodes[1].childNodes[1].textContent);
       for (var i = 1; i <= $tableRankBody.childNodes.length - 1; i++) {
         $tableRankBody.childNodes[i].childNodes[1].addEventListener('click', function (e) {
           ballDontLie(e.target.textContent);
@@ -149,7 +144,6 @@ function depthChart(team, letter) {
     xml = xhr.response;
     var jsonString = JSON.stringify(xmlToJson(xml));
     jsonParseDepth = JSON.parse(jsonString)
-    //console.log('to JSON', jsonParseDepth);
     var position = null;
     for (var x = 0; x <= jsonParseDepth.FantasyBasketballNerd.Team.Position.length - 1; x++) {
       if (jsonParseDepth.FantasyBasketballNerd.Team.Position[x]["@attributes"].position === letter) {
@@ -228,11 +222,7 @@ function ballDontLieSeasonAvg(season, id) {
   var xhr = new XMLHttpRequest();
   xhr.open('GET', 'https://www.balldontlie.io/api/v1/season_averages?season=' + season + '&player_ids[]=' + id);
   xhr.responseType = 'json';
-  xhr.addEventListener('loadstart', function () {
-    console.log('loading');
-  });
   xhr.addEventListener('load', function () {
-    //console.log(xhr.response);
     var queryData = ['season', 'pts', 'ast', 'reb', 'stl', 'blk', 'ft_pct', 'fg3_pct', 'turnover'];
     var $tr = document.createElement('tr');
     $tr.classList.add(queryData[0]);
@@ -261,11 +251,9 @@ function getTeams() {
   var xhr = new XMLHttpRequest();
   xhr.open('GET', 'https://www.balldontlie.io/api/v1/teams');
   xhr.responseType = 'json';
-  // xhr.addEventListener('loadstart', function () {
-  //   //loading();
-  // });
+
   xhr.addEventListener('load', function () {
-    //viewSwap(2);
+
     for (var i = 0; i <= xhr.response.data.length - 1; i++) {
       var $option = document.createElement('option');
       $option.textContent = xhr.response.data[i].abbreviation;
