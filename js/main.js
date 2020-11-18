@@ -165,6 +165,7 @@ function depthChart(team, letter) {
 
       $rank.textContent = jsonParseDepth.FantasyBasketballNerd.Team.Position[position].Player[i].rank['#text'];
       $player.textContent = jsonParseDepth.FantasyBasketballNerd.Team.Position[position].Player[i].name['#text'];
+      $player.classList.add('tableRankDataPlayer');
       $tr.appendChild($rank);
       $tr.appendChild($player);
       $topPlayerFormBody.appendChild($tr);

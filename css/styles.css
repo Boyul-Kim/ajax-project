@@ -1,3 +1,4 @@
+
 .homepage {
   width: 100%;
 }
@@ -10,9 +11,9 @@
   height: 200px;
 }
 
-.homepage-image img{
+/* .homepage-image img{
   width: 80%;
-}
+} */
 
 .homepage-form-input {
   width: 100%;
@@ -68,4 +69,37 @@ tr{
 
 .red-color {
   color:rgb(198, 56, 56);
+}
+
+.tableRankDataPlayer:hover {
+  color:rgb(198, 56, 56);
+  cursor: pointer;
+}
+
+.tableRankDataPlayer:active {
+  color:rgb(198, 56, 56);
+}
+
+.buttonIconPointer {
+  cursor: pointer;
+}
+
+@media screen and (min-width: 600px) {
+  .block {
+    width: 70%;
+  }
+}
+
+@media screen and (min-width: 900px) {
+  .block {
+    width: 40%;
+  }
+
+  .table-rank {
+    width: 20%;
+  }
+
+  .topPlayerTable {
+    width: 50%;
+  }
 }
